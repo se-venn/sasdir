@@ -1,0 +1,290 @@
+/* ==========================================
+   Global Light Theme (Full White Document)
+   ========================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212; /* Latar belakang aplikasi diubah gelap manis biar kertas putihnya stand out */
+  font-family: Arial, Helvetica, sans-serif;
+  color: #202020;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Penampung flex vertikal pembungkus kertas & tombol */
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 30px 0;
+}
+
+/* ==========================================
+   Kontainer Utama (Kertas Full Putih)
+   ========================================== */
+.report-container {
+  width: 210mm;
+  min-height: auto;
+  background-color: #ffffff; /* Kertas full putih bersih */
+  border: 1px solid #b5b5b5;
+  padding: 25px;
+  margin: 0 auto;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3); /* Bayangan dokumen */
+}
+
+/* Area khusus tombol di bawah kertas */
+.button-wrapper {
+  width: 210mm;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+#btn-export {
+  padding: 12px 28px;
+  cursor: pointer;
+  background: #1e3f20; /* Hijau Sheriff */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 10pt;
+  transition: 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgb(240, 240, 240);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#btn-export:hover {
+  background: #132714;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   Header Style
+   ========================================== */
+.report-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.header-left {
+  flex: 0 0 110px;
+}
+
+.sheriff-logo-placeholder {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.header-text {
+  flex: 1;
+  padding-left: 15px;
+}
+
+.header-text h1 {
+  font-size: 15pt;
+  font-weight: bold;
+  color: #1e3f20;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.5px;
+}
+
+.header-text h3 {
+  font-size: 9pt;
+  font-weight: bold;
+  color: #555555;
+  margin: 0 0 4px 0;
+}
+
+.header-text p {
+  font-size: 8.5pt;
+  color: #777777;
+  margin: 0;
+}
+
+/* ==========================================
+   Garis Pembatas & Judul Laporan
+   ========================================== */
+.form-divider-bold {
+  border-top: 2px solid #1e3f20;
+  margin-top: 10px;
+}
+
+.form-divider-thin {
+  border-top: 1px solid #cccccc;
+  margin-bottom: 15px;
+}
+
+.report-type-title {
+  text-align: center;
+  font-size: 11pt;
+  font-weight: bold;
+  color: #202020;
+  text-transform: uppercase;
+  padding: 8px 0;
+  letter-spacing: 1px;
+}
+
+/* ==========================================
+   Struktur Tabel Data (Putih Bersih)
+   ========================================== */
+.form-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+  background-color: #ffffff;
+}
+
+.form-table th,
+.form-table td {
+  border: 1px solid #b5b5b5;
+  padding: 8px 10px;
+  font-size: 9pt;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.form-table th {
+  background-color: #ffffff;
+  color: #202020;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 8.5pt;
+}
+
+.form-table td {
+  color: #202020;
+  background-color: #ffffff;
+}
+
+.form-table td input[type="text"],
+.form-table td input[type="datetime"] {
+  width: 100%;
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+  padding: 4px 6px;
+  color: #202020;
+  font-family: inherit;
+  font-size: 9pt;
+  outline: none;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.table-section-title {
+  background-color: #ffffff;
+  border: 1px solid #b5b5b5;
+  border-bottom: none;
+  padding: 6px 10px;
+  font-size: 8.5pt;
+  font-weight: bold;
+  color: #202020;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ==========================================
+   Checkbox Grid Style
+   ========================================== */
+.checkbox-grid-container {
+  border: 1px solid #b5b5b5;
+  padding: 15px;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 9pt;
+  color: #202020;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox input {
+  display: none;
+}
+
+.checkmark {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #202020;
+  background-color: #ffffff;
+  margin-right: 8px;
+  display: inline-block;
+  position: relative;
+}
+
+.custom-checkbox input:checked + .checkmark {
+  background-color: #ffffff;
+  border-color: #1e3f20;
+}
+
+.custom-checkbox input:checked + .checkmark::after {
+  content: "✓";
+  position: absolute;
+  color: #1e3f20;
+  font-size: 10pt;
+  font-weight: bold;
+  top: -3px;
+  left: 2px;
+}
+
+.custom-checkbox.inline {
+  display: inline-flex;
+  margin-right: 15px;
+}
+
+/* ==========================================
+   Details / Seksi Narasi Utama
+   ========================================== */
+.details-box {
+  border: 1px solid #b5b5b5;
+  margin-bottom: 15px;
+  background-color: #ffffff;
+}
+
+.details-title {
+  background-color: #ffffff;
+  padding: 8px 10px;
+  font-size: 8.5pt;
+  font-weight: bold;
+  color: #202020;
+  border-bottom: 1px solid #b5b5b5;
+  text-transform: uppercase;
+}
+
+.details-textarea {
+  display: block;
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  font-size: 9.5pt;
+  line-height: 1.5;
+  color: #202020;
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  resize: vertical;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}

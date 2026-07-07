@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LSSD Incident Report - Light Template</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <div class="report-container" id="report-content">
+        <div class="report-header">
+          <div class="header-left">
+            <img
+              src="lssd.png"
+              alt="LSSD Star Logo"
+              class="sheriff-logo-placeholder"
+            />
+          </div>
+          <div class="header-text">
+            <h1>LOS SANTOS COUNTY SHERIFF'S DEPARTMENT</h1>
+            <h3>
+              OFFICE OF NORTH PATROL DIVISION - 6 | SANTA CLARA VALLEY SHERIFF'S
+              STATION
+            </h3>
+            <p>PALOMINO CREEK, LOS SANTOS COUNTY</p>
+          </div>
+        </div>
+
+        <div class="form-divider-bold"></div>
+        <div class="report-type-title">INCIDENT REPORT</div>
+        <div class="form-divider-thin"></div>
+
+        <table class="form-table">
+          <thead>
+            <tr>
+              <th style="width: 45%">DATE - TIME</th>
+              <th style="width: 25%">CALLSIGN</th>
+              <th style="width: 30%">PARTNER</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="datetime-local" /></td>
+              <td><input type="text" /></td>
+              <td><input type="text" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="table-section-title">Incident Type</div>
+        <div class="checkbox-grid-container">
+          <label class="custom-checkbox">
+            <input type="checkbox" />
+            <span class="checkmark"></span> Vehicle/Traffic Related (V/T)
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox" /> <span class="checkmark"></span> In-Custody
+            Incident (ICI)
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox" /> <span class="checkmark"></span> Use of
+            Force (UOF)
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox" />
+            <span class="checkmark"></span> Firearm Discharged (F/D)
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox" /> <span class="checkmark"></span> Deputy
+            Injury Related (INJ)
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox" /> <span class="checkmark"></span> Property
+            Damage (PROP)
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox" /> <span class="checkmark"></span> Vehicular
+            Pursuit (VPRT)
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox" />
+            <span class="checkmark"></span> Other (OTHR)
+          </label>
+        </div>
+
+        <div class="details-box">
+          <div class="details-title">DETAILS OF INCIDENT</div>
+          <textarea
+            class="details-textarea"
+            placeholder="fill in the details of the incident here..."
+          ></textarea>
+        </div>
+
+        <table class="form-table multi-column">
+          <thead>
+            <tr>
+              <th>FIREARM DISCHARGED?</th>
+              <th>INJURIES REPORTED?</th>
+              <th>PROPERTY DAMAGE?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <label class="custom-checkbox inline"
+                  ><input type="checkbox" /><span class="checkmark"></span>
+                  Yes</label
+                >
+                <label class="custom-checkbox inline"
+                  ><input type="checkbox" /><span class="checkmark"></span>
+                  No</label
+                >
+              </td>
+              <td>
+                <label class="custom-checkbox inline"
+                  ><input type="checkbox" /><span class="checkmark"></span>
+                  Yes</label
+                >
+                <label class="custom-checkbox inline"
+                  ><input type="checkbox" /><span class="checkmark"></span>
+                  No</label
+                >
+              </td>
+              <td>
+                <label class="custom-checkbox inline"
+                  ><input type="checkbox" /><span class="checkmark"></span>
+                  Yes</label
+                >
+                <label class="custom-checkbox inline"
+                  ><input type="checkbox" /><span class="checkmark"></span>
+                  No</label
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="form-table POI-table">
+          <thead>
+            <tr>
+              <th>Person of Interest Name</th>
+              <th>Person of Interest Role</th>
+              <th>Person of Interest Contact Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" /></td>
+              <td><input type="text" /></td>
+              <td><input type="text" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="form-table deputy-table">
+          <thead>
+            <tr>
+              <th style="width: 45%">DEPUTY RANK AND NAME</th>
+              <th style="width: 15%">SERIAL NO.</th>
+              <th style="width: 40%">DIVISION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" id="deputy-name-input" /></td>
+              <td><input type="text" /></td>
+              <td><input type="text" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="button-wrapper">
+        <button id="btn-export"><span>💾</span> EXPORT KE JPG</button>
+      </div>
+    </div>
+
+    <script>
+      // Script Export ke JPG (Fix Tuntas Double Checkbox & Checkmark CSS)
+      document
+        .getElementById("btn-export")
+        .addEventListener("click", function () {
+          const report = document.getElementById("report-content");
+          if (!report) return alert("Elemen laporan tidak ditemukan!");
+
+          const inputs = report.querySelectorAll("input, textarea, select");
+          const tempReplacements = [];
+
+          // 1. Sembunyikan tombol biar gak masuk gambar
+          this.style.display = "none";
+
+          // 2. Loop elemen input menjadi tampilan teks statis untuk rendering gambar
+          inputs.forEach((el) => {
+            const replacement = document.createElement("div");
+            let val = "";
+
+            if (el.tagName === "SELECT") {
+              val = el.options[el.selectedIndex].text;
+              if (val === "-") val = "";
+            } else if (el.type === "checkbox") {
+              // Logika simbol centang/kosong
+              val = el.checked ? "☑" : "☐";
+              replacement.style.fontFamily = "'Arial', sans-serif";
+            } else {
+              val = el.value;
+            }
+
+            replacement.innerText = val || " ";
+            const style = window.getComputedStyle(el);
+
+            if (el.type !== "checkbox") {
+              replacement.style.fontFamily = style.fontFamily;
+            }
+            replacement.style.fontSize = style.fontSize;
+            replacement.style.color = "#202020";
+            replacement.style.padding = style.padding;
+            replacement.style.lineHeight = style.lineHeight;
+            replacement.style.whiteSpace = "pre-wrap";
+            replacement.style.wordWrap = "break-word";
+
+            if (el.type === "checkbox") {
+              replacement.style.display = "inline-block";
+              replacement.style.marginRight = "5px";
+              replacement.style.verticalAlign = "middle";
+
+              // Sembunyikan input asli
+              el.style.display = "none";
+
+              // KUNCI UTAMA: Cari elemen .checkmark di sebelah input ini dan sembunyikan juga!
+              const siblingCheckmark =
+                el.parentNode.querySelector(".checkmark");
+              if (siblingCheckmark) {
+                siblingCheckmark.style.display = "none";
+              }
+
+              el.parentNode.insertBefore(replacement, el);
+            } else {
+              replacement.style.display = "inline-block";
+              if (el.tagName === "INPUT") {
+                replacement.style.borderBottom = "1px solid #eee";
+                replacement.style.minWidth = el.offsetWidth + "px";
+              }
+              if (el.tagName === "TEXTAREA") {
+                replacement.style.width = "100%";
+                replacement.style.minHeight = el.offsetHeight + "px";
+                replacement.style.display = "block";
+              }
+              el.style.display = "none";
+              el.parentNode.insertBefore(replacement, el);
+            }
+            tempReplacements.push({ original: el, temp: replacement });
+          });
+
+          // 3. Jalankan render html2canvas
+          html2canvas(report, {
+            scale: 3,
+            useCORS: true,
+            backgroundColor: "#ffffff",
+            logging: false,
+            windowWidth: report.scrollWidth,
+            windowHeight: report.scrollHeight,
+          })
+            .then((canvas) => {
+              const image = canvas.toDataURL("image/jpeg", 1.0);
+              const link = document.createElement("a");
+              link.download = `LSSD-Report-${Date.now()}.jpg`;
+              link.href = image;
+              link.click();
+
+              // 4. KEMBALIKAN SEMUA INPUT KE SEMULA SETELAH DRAW SELESAI
+              tempReplacements.forEach((item) => {
+                item.original.style.display = "";
+
+                // Tampilkan kembali .checkmark CSS-nya setelah beres cetak
+                if (item.original.type === "checkbox") {
+                  const siblingCheckmark =
+                    item.original.parentNode.querySelector(".checkmark");
+                  if (siblingCheckmark) {
+                    siblingCheckmark.style.display = "";
+                  }
+                }
+
+                item.temp.remove();
+              });
+              this.style.display = "flex";
+            })
+            .catch((err) => {
+              console.error(err);
+              this.style.display = "flex";
+            });
+        });
+    </script>
+  </body>
+</html>
